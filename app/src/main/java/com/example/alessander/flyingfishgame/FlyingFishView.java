@@ -25,6 +25,9 @@ public class FlyingFishView extends View {
     private int greenX, greenY, greenSpeed = 20;
     private Paint greenPaint = new Paint();
 
+    private int redX, redY, redSpeed = 25;
+    private Paint redPaint = new Paint();
+
     private int score;
 
     private boolean touch = false;
@@ -47,6 +50,9 @@ public class FlyingFishView extends View {
 
         greenPaint.setColor(Color.GREEN);
         greenPaint.setAntiAlias(false);
+
+        redPaint.setColor(Color.RED);
+        redPaint.setAntiAlias(false);
 
         scorePaint.setColor(Color.WHITE);
         scorePaint.setTextSize(70);
@@ -86,16 +92,14 @@ public class FlyingFishView extends View {
             touch = false;
         } else {
             canvas.drawBitmap(fish[0], fishX, fishY, null);
-
         }
+
         // yellow ball
         yellowX = yellowX - yellowSpeed;
-
         if (hitBallChecker(yellowX, yellowY)) {
             score = score + 10;
             yellowX = -100;
         }
-
         if (yellowX < 0) {
             yellowX = canvasWidth + 21;
             yellowY = (int) Math.floor(Math.random() * (maxFishY - minFishY)) + minFishY;
@@ -104,18 +108,28 @@ public class FlyingFishView extends View {
 
         // green ball
         greenX = greenX - greenSpeed;
-
         if (hitBallChecker(greenX, greenY)) {
             score = score + 20;
             greenX = -100;
         }
-
         if (greenX < 0) {
             greenX = canvasWidth + 21;
             greenY = (int) Math.floor(Math.random() * (maxFishY - minFishY)) + minFishY;
         }
         canvas.drawCircle(greenX, greenY, 25, greenPaint);
+
+        // red ball
+        redX = redX - redSpeed;
+        if (hitBallChecker(redX, redY)) {
+            redX = -100;
+        }
+        if (redX < 0) {
+            redX = canvasWidth + 21;
+            redY = (int) Math.floor(Math.random() * (maxFishY - minFishY)) + minFishY;
+        }
+        canvas.drawCircle(redX, redY, 30, redPaint);
         // ---
+
         canvas.drawText("Score : " + score, 20, 60, scorePaint);
 
         canvas.drawBitmap(life[0], 380, 10, null);
