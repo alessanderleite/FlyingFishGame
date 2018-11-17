@@ -133,6 +133,7 @@ public class FlyingFishView extends View {
 
                 Intent gameOverIntent = new Intent(getContext(), GameOverActivity.class);
                 gameOverIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                gameOverIntent.putExtra("score", score);
                 getContext().startActivity(gameOverIntent);
             }
         }
@@ -146,7 +147,7 @@ public class FlyingFishView extends View {
         canvas.drawText("Score : " + score, 20, 60, scorePaint);
 
         for (int i = 0; i < 3; i++) {
-            int x = (int) (580 + life[0].getWidth() * 1.5 * i);
+            int x = (int) (400 + life[0].getWidth() * 1.5 * i);
             int y = 30;
 
             if (i < lifeCounterOfFish) {
